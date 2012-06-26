@@ -1,0 +1,4 @@
+ebot
+====
+
+Erlang XMPP bot
