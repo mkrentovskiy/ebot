@@ -1,0 +1,9 @@
+{application, ebot,
+ [
+  {description, "Erlang Jabber Bot"},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [kernel, stdlib]},
+  {mod, { ebot_app, []}},
+  {env, [{user, "ebot33"}, {server, "jabber.ru"}, {password, "qwe123dsa"}, {guru, "mkrentovskiy@gmail.com"}]}
+ ]}.
