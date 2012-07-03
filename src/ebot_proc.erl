@@ -47,14 +47,12 @@ conf(P) ->
 	case ?BODY(P) of
 		undefined -> ok;
 		Me ->
-			% send message to guru
-			?AS(ebot_a:send(?G, LNick ++ ": " ++ ?L(Me))),
 			% its not me?
 			case LNick == ?CN of 
 				true -> ok;
 				_ -> 
 					% its to me
-					case re:run(Me, "^[ ]*" ++ ?CN, [{capture,[1],list}]) of
+					case re:run(Me, "^[ ]*(ebot|ебот)", [{capture,[1],list}]) of
 						{match, _} -> conf_process(LNick, Me);
 						_ -> conf_watch(LNick, Me)
 					end
@@ -70,7 +68,8 @@ conf_nick(P) ->
 
 conf_process(LNick, Me) ->
 	PA = [
-			{ "(сиськи|сиски|соски|cbcrb|cbcmrb|cjcrb){1}( для | for | дле | за | для )?(.*)", 
+
+			{ "(сиськи|сиски|соски|сисек|cbcrb|cbcmrb|cjcrb){1}( для | for | дле | за | для )?(.*)", 
 			  	fun(M) -> 
 					B = find_boobs(),
 					case M of
@@ -78,12 +77,28 @@ conf_process(LNick, Me) ->
 						_ -> ?AS(ebot_a:say(?C, ?CN, LNick ++ B))
 					end
 			  	end },
+
 			{ "че там в ([^?.]*)",
-			  	fun([_,T]) -> 
+			  	fun([_, T]) -> 
 					?AS(ebot_a:say(?C, ?CN, LNick ++ ", да чета нет в " ++ T ++ " ничего"))
+			  	end },
+
+			{ "запомни([^=]*)=(.*)",
+			  	fun([_, K, V]) -> 
+			  		set_val(K,V),
+					?AS(ebot_a:say(?C, ?CN, LNick ++ ", угу, записал!"))
+			  	end },
+
+			{ "что такое ([^?.]*)",
+			  	fun([_, K]) -> 
+			  		case get_val(K) of
+			  			not_found -> ?AS(ebot_a:say(?C, ?CN, LNick ++ ", угу, записал!"));
+			  			{ok, V} -> ?AS(ebot_a:say(?C, ?CN, LNick ++ ", " ++ K ++ " = " ++ V))
+					end
 			  	end }
+
 		],
-	PAR = list:foldl(fun({Re, F}, OF) ->
+	PAR = lists:foldl(fun({Re, F}, OF) ->
 				case re:run(Me, Re, [{capture, all, list}]) of
 					{match, C} -> fun() -> F(C) end; 
 					_ -> OF
@@ -98,7 +113,9 @@ conf_process(LNick, Me) ->
 	PAR().  
 
 
-conf_watch(LNick, Me) -> ok.
+conf_watch(LNick, Me) -> 
+	?AS(ebot_a:send(?G, LNick ++ ": " ++ ?L(Me))),
+	ok.
 
 find_boobs() -> 
 	try 
@@ -119,3 +136,5 @@ parse_kmb(Num) ->
 		_ -> []
 	end.
 
+set_val(_K, _V) -> ok.
+get_val(_K) -> not_found.

@@ -1,5 +1,4 @@
-FLEXPATH=~/flex
-REBAR=$(shell which rebar || echo ./rebar)
+REBAR=./rebar
 
 .PHONY:deps
 

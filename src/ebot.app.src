@@ -5,5 +5,5 @@
   {registered, []},
   {applications, [kernel, stdlib]},
   {mod, { ebot_app, []}},
-  {env, [{user, "ebot33"}, {server, "jabber.ru"}, {password, "qwe123dsa"}, {guru, "mkrentovskiy@gmail.com"}]}
+  {env, [{user, "ebot"}, {server, "jabber.ru"}, {password, "*******"}, {guru, "mkrentovskiy@gmail.com"}]}
  ]}.
