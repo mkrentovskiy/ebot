@@ -25,5 +25,6 @@ start_link() ->
 
 init([]) ->
 	Agent = ?CHILD(ebot_a, worker),
-    {ok, {{one_for_one, 5, 10}, [Agent]} }.
+	Watcher = ?CHILD(watcher, worker),
+    {ok, {{one_for_one, 5, 10}, [Agent, Watcher]} }.
 

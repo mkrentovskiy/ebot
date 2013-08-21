@@ -11,3 +11,9 @@
 
 -define(L(S), binary_to_list(S)).
 -define(AS(A), proc_lib:spawn(fun() -> A end)).
+
+-define(G, ebot:env(guru, "root@localhost")).
+
+-define(TIMEOUT, 10 * 60 * 1000).
+
+-record(src, {url = undefine, id = 0, type = page, state = none}).
