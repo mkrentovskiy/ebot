@@ -3,7 +3,7 @@
   {description, "Erlang Jabber Bot"},
   {vsn, "1"},
   {registered, []},
-  {applications, [kernel, stdlib]},
+  {applications, [kernel, stdlib, crypto, exmpp, mnesia, ibrowse, iconv]},
   {mod, { ebot_app, []}},
-  {env, [{user, "me"}, {server, "jabber.ru"}, {password, ""}, {guru, "mkrentovskiy@gmail.com"}]}
+  {env, [{user, "ebot"}, {server, "jabber.ru"}, {password, ""}, {guru, "mkrentovskiy@gmail.com"}]}
  ]}.

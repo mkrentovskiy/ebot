@@ -34,5 +34,14 @@ process(<<"del ", Id/binary>>) ->
 	IdN = list_to_integer(binary_to_list(Id)),
 	Res = watcher:del(IdN),
 	?AS(ebot_a:send(?G, Res));
+process(<<"run">>) -> 
+	Res = watcher:run(),
+	?AS(ebot_a:send(?G, Res));
+process(<<"stop">>) -> 
+	Res = watcher:stop(),
+	?AS(ebot_a:send(?G, Res));
+process(<<"now">>) -> 
+	Res = watcher:now(),
+	?AS(ebot_a:send(?G, Res));
 process(_) ->
-	?AS(ebot_a:send(?G, "[list|add _url_|addrss _url_|del _id_]")).
+	?AS(ebot_a:send(?G, "[list|add _url_|addrss _url_|del _id_|run|stop|now]")).

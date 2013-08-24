@@ -14,6 +14,6 @@
 
 -define(G, ebot:env(guru, "root@localhost")).
 
--define(TIMEOUT, 10 * 60 * 1000).
+-define(TIMEOUT, 1 * 60 * 1000).
 
--record(src, {url = undefine, id = 0, type = page, state = none}).
+-record(src, {url = undefine, id = 0, type = page, state = []}).

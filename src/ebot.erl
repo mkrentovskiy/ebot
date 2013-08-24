@@ -6,9 +6,11 @@ start() ->
 	ensure_started(exmpp),
     ensure_started(mnesia),
     ensure_started(ibrowse),
+    ensure_started(iconv),
     application:start(ebot).
 
 stop() ->
+    application:stop(iconv),    
     application:stop(mnesia),    
     application:stop(ibrowse),    
 	application:stop(exmpp),	
