@@ -140,7 +140,6 @@ next() ->
 get_and_parse(Url, Type, RE) ->
 	RH = [
 		{ "Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" },
-		{ "Accept-Encoding", "deflate" },
 		{ "Accept-Language", "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4" },
 		{ "User-Agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/28.0.1500.71 Chrome/28.0.1500.71 Safari/537.36" }
 	],
